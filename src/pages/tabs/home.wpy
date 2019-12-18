@@ -1,11 +1,25 @@
-<style lang="less">
-</style>
 <template>
-  <swiper indicator-dots autoplay circular>
-    <swiper-item wx:for="{{swiperList}}" wx:key="index">
-      <image src="{{item.image_src}}"></image>
-    </swiper-item>
-  </swiper>
+  <view>
+    <!-- 轮播图 -->
+    <swiper indicator-dots autoplay circular>
+      <swiper-item wx:for="{{swiperList}}" wx:key="index" @tap="onNavigateTo({{item.navigator_url}})">
+        <image src="{{item.image_src}}"></image>
+      </swiper-item>
+    </swiper>
+    <!-- 轮播图 -->
+
+    <!-- 导航 -->
+    <view class="catitems">
+      <view wx:for="{{catitemsList}}" wx:key="index">
+        <!-- 判断是否要跳转 -->
+        <navigator wx:if="{{item.open_type}}" url="/pages/tabs/cates" open-type="{{item.open_type}}" hover-class="node">
+          <image src="{{item.image_src}}"></image>
+        </navigator>
+        <image wx:else src="{{item.image_src}}"></image>
+      </view>
+    </view>
+    <!-- 导航 -->
+  </view>
 </template>
 
 <script>
@@ -13,12 +27,25 @@
 
   export default class extends wepy.page {
     data = {
-      swiperList: [] // 轮播图数据
+      swiperList: [], // 轮播图数据
+      catitemsList: [] // 导航
+    }
+
+    methods = {
+      // 页面跳转
+      onNavigateTo(url) {
+        wepy.navigateTo({
+          url: url
+        })
+      }
     }
 
     onLoad() {
       // 获取轮播图
       this.getSwiperList()
+
+      // 获取导航
+      this.getCatitemsList()
     }
 
     async getSwiperList() {
@@ -28,5 +55,25 @@
       this.swiperList = data.message
       this.$apply()
     }
+
+    async getCatitemsList() {
+      const {data} = await wepy.request({
+        url: 'https://api.zbztb.cn/api/public/v1/home/catitems'
+      })
+      this.catitemsList = data.message
+      this.$apply()
+    }
   }
 </script>
+
+<style lang="less">
+.catitems{
+  display: flex;
+  justify-content: space-around;
+  padding: 10rpx 0;
+  image{
+    width: 180rpx;
+    height: 180rpx;
+  }
+}
+</style>
