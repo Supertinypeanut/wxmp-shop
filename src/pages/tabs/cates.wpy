@@ -1,8 +1,23 @@
 <template>
-<view>
-    <scroll-view style="height:{{vh}}px;" scroll-y class="left">
-    <view wx:for="{{categories}}" wx:key="cat_id">{{item.cat_name}}</view>
-  </scroll-view>
+<view class="cates">
+  <!-- 侧导航 -->
+  <scroll-view style="height:{{vh}}px;" scroll-y class="left">
+    <view wx:for="{{categories}}" wx:key="cat_id" @tap="onChoose({{item}})">{{item.cat_name}}</view>
+  </scroll-view>  
+  <!-- 侧导航 -->
+
+  <!-- 二级分类 -->
+  <scroll-view style="height:{{vh}}px;" scroll-y class="right">
+    <!-- 单个 -->
+    <view wx:for="{{currentItem.children}}" wx:key="cat_id">
+      <view class="title">/{{item.cat_name}}/</view>
+      <view class="content">
+        <image src="{{item.cat_icon}}" wx:for="{{item.children}}" wx:key="cat_id"></image>
+      </view>
+    </view>
+  </scroll-view>  
+  <!-- 二级分类 -->
+
 </view>
 
 </template>
@@ -10,38 +25,41 @@
 <script>
 import wepy from 'wepy'
 
+import mixin from '@/mixins/tabs/cates.js'
+
 export default class extends wepy.page {
-  data = {
-    vh: 0,  // 视口高度
-    categories: {} // 分类数据
-  }
-
-  onLoad() {
-    // 获取屏幕高度
-    this.getScreenHeight()
-
-    // 获取分类数据
-    this.getCategories()
-  }
-
-  async getScreenHeight() {
-    // 获取系统信息
-    const sysInfo = await wepy.getSystemInfo()
-    this.vh = sysInfo.windowHeight
-    this.$apply()
-  }
-
-  async getCategories() {
-    const { data } = await wepy.get('categories')
-    this.categories = data.message
-    console.log(data)
-    this.$apply()
-  }
+  mixins = [ mixin ]
 }
 </script>
 <style lang="less">
-.left{
-  width: 180rpx;
-  background-color: #eee;
+.cates{
+  display: flex;
+  .left{
+    width: 180rpx;
+    background-color: #eee;
+    .target{
+      background-color: #4ac;
+    }
+    view{
+      border-bottom: 1rpx solid #000;
+    }
+  }
+  .right{
+    .title{
+      text-align: center;
+      font-size: 38rpx;
+    }
+    .content{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      image{
+        width: 100rpx;
+        height: 100rpx;
+        margin: 20rpx;
+      }
+    }
+  }
 }
+
 </style>
