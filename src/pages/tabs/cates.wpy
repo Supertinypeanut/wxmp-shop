@@ -1,7 +1,21 @@
-<style lang="less">
-</style>
 <template>
-  <view>cates<view>
+  <scroll-view style="height:100rpx;" scroll-y>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+    <view>000</view>
+  </scroll-view>
 </template>
 
 <script>
@@ -10,3 +24,6 @@
   export default class extends wepy.page {
   }
 </script>
+<style lang="less">
+
+</style>

@@ -25,14 +25,14 @@
       <image class="title" src="{{item.floor_title.image_src}}"></image>
       <view class="product_list">
         <!-- 左侧大图 -->
-        <navigator url="{{item.product_list[0].navigator_url}}" open-type="{{item.product_list[0].open_type}}">
+        <navigator hover-class="node" url="{{item.product_list[0].navigator_url}}" open-type="{{item.product_list[0].open_type}}">
           <image src="{{item.product_list[0].image_src}}" style="width:{{item.product_list[0].image_width}}rpx" mode="widthFix"></image>
         </navigator>
         <!-- 左侧大图 -->
 
         <!-- 右侧小图 -->
         <view class="right">
-          <navigator wx:for="{{item.product_list}}" url="{{item.navigator_url}}" open-type="{{item.open_type}}">
+          <navigator hover-class="node" wx:for="{{item.product_list}}" wx:key="index" url="{{item.navigator_url}}" open-type="{{item.open_type}}">
            <image wx:if="{{index > 0}}" class="left" src="{{item.image_src}}" style="width:{{item.image_width}}rpx" mode="widthFix"></image>
           </navigator>
         </view>
@@ -44,60 +44,12 @@
 </template>
 
 <script>
-  import wepy from 'wepy'
+import wepy from 'wepy'
+import mixin from '@/mixins/tabs/home.js'
 
-  export default class extends wepy.page {
-    data = {
-      swiperList: [], // 轮播图数据
-      catitemsList: [], // 导航
-      floordata: {} // 楼层数据
-    }
-
-    methods = {
-      // 页面跳转
-      onNavigateTo(url) {
-        wepy.navigateTo({
-          url: url
-        })
-      }
-    }
-
-    onLoad() {
-      // 获取轮播图
-      this.getSwiperList()
-
-      // 获取导航
-      this.getCatitemsList()
-
-      // 获取楼层
-      this.getFloordata()
-    }
-
-    async getSwiperList() {
-      const {data} = await wepy.request({
-        url: 'https://uinav.com/api/public/v1/home/swiperdata'
-      })
-      this.swiperList = data.message
-      this.$apply()
-    }
-
-    async getCatitemsList() {
-      const {data} = await wepy.request({
-        url: 'https://api.zbztb.cn/api/public/v1/home/catitems'
-      })
-      this.catitemsList = data.message
-      this.$apply()
-    }
-
-    async getFloordata() {
-      const {data} = await wepy.request({
-        url: 'https://api.zbztb.cn/api/public/v1/home/floordata'
-      })
-      console.log(data)
-      this.floordata = data.message
-      this.$apply()
-    }
-  }
+export default class extends wepy.page {
+  mixins = [mixin]
+}
 </script>
 
 <style lang="less">

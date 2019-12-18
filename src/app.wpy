@@ -6,6 +6,8 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
 
+import '@/api/baseAPI.js'
+
 export default class extends wepy.app {
   config = {
     pages: [
