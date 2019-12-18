@@ -19,6 +19,27 @@
       </view>
     </view>
     <!-- 导航 -->
+
+    <!-- 楼层 -->
+    <view class="floor" wx:for="{{ floordata }}" wx:key="index">
+      <image class="title" src="{{item.floor_title.image_src}}"></image>
+      <view class="product_list">
+        <!-- 左侧大图 -->
+        <navigator url="{{item.product_list[0].navigator_url}}" open-type="{{item.product_list[0].open_type}}">
+          <image src="{{item.product_list[0].image_src}}" style="width:{{item.product_list[0].image_width}}rpx" mode="widthFix"></image>
+        </navigator>
+        <!-- 左侧大图 -->
+
+        <!-- 右侧小图 -->
+        <view class="right">
+          <navigator wx:for="{{item.product_list}}" url="{{item.navigator_url}}" open-type="{{item.open_type}}">
+           <image wx:if="{{index > 0}}" class="left" src="{{item.image_src}}" style="width:{{item.image_width}}rpx" mode="widthFix"></image>
+          </navigator>
+        </view>
+        <!-- 右侧小图 -->
+      </view>
+    </view>
+    <!-- 楼层 -->
   </view>
 </template>
 
@@ -28,7 +49,8 @@
   export default class extends wepy.page {
     data = {
       swiperList: [], // 轮播图数据
-      catitemsList: [] // 导航
+      catitemsList: [], // 导航
+      floordata: {} // 楼层数据
     }
 
     methods = {
@@ -46,6 +68,9 @@
 
       // 获取导航
       this.getCatitemsList()
+
+      // 获取楼层
+      this.getFloordata()
     }
 
     async getSwiperList() {
@@ -63,17 +88,50 @@
       this.catitemsList = data.message
       this.$apply()
     }
+
+    async getFloordata() {
+      const {data} = await wepy.request({
+        url: 'https://api.zbztb.cn/api/public/v1/home/floordata'
+      })
+      console.log(data)
+      this.floordata = data.message
+      this.$apply()
+    }
   }
 </script>
 
 <style lang="less">
+// 轮播图
+swiper-item image{
+  height: 100%;
+}
+// 导航样式
 .catitems{
   display: flex;
   justify-content: space-around;
-  padding: 10rpx 0;
+  padding: 20rpx 0;
   image{
     width: 180rpx;
     height: 180rpx;
+  }
+}
+
+// 楼层样式
+.floor{
+  .title{
+    height: 50rpx;
+  }
+  .product_list{
+    display: flex;
+    padding: 16rpx 0;
+    navigator:nth-child(1){
+      margin-left: 10rpx;
+    }
+    .right{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
   }
 }
 </style>
