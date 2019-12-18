@@ -1,15 +1,32 @@
 <style lang="less">
 </style>
 <template>
-  <view>home<view>
+  <swiper indicator-dots autoplay circular>
+    <swiper-item wx:for="{{swiperList}}" wx:key="index">
+      <image src="{{item.image_src}}"></image>
+    </swiper-item>
+  </swiper>
 </template>
 
 <script>
   import wepy from 'wepy'
 
   export default class extends wepy.page {
-    onLoad(){
-      
+    data = {
+      swiperList: [] // 轮播图数据
+    }
+
+    onLoad() {
+      // 获取轮播图
+      this.getSwiperList()
+    }
+
+    async getSwiperList() {
+      const {data} = await wepy.request({
+        url: 'https://uinav.com/api/public/v1/home/swiperdata'
+      })
+      this.swiperList = data.message
+      this.$apply()
     }
   }
 </script>

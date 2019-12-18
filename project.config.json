@@ -1,14 +1,25 @@
 {
 	"description": "A WePY project",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
-		"minified": false
+		"minified": false,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"appid": "wx561dfe580425a801",
-	"projectname": "yougou",
+	"projectname": "wepy-demo",
 	"miniprogramRoot": "dist/",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
