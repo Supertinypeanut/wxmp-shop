@@ -1,29 +1,47 @@
 <template>
-  <scroll-view style="height:100rpx;" scroll-y>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
-    <view>000</view>
+<view>
+    <scroll-view style="height:{{vh}}px;" scroll-y class="left">
+    <view wx:for="{{categories}}" wx:key="cat_id">{{item.cat_name}}</view>
   </scroll-view>
+</view>
+
 </template>
 
 <script>
-  import wepy from 'wepy'
+import wepy from 'wepy'
 
-  export default class extends wepy.page {
+export default class extends wepy.page {
+  data = {
+    vh: 0,  // 视口高度
+    categories: {} // 分类数据
   }
+
+  onLoad() {
+    // 获取屏幕高度
+    this.getScreenHeight()
+
+    // 获取分类数据
+    this.getCategories()
+  }
+
+  async getScreenHeight() {
+    // 获取系统信息
+    const sysInfo = await wepy.getSystemInfo()
+    this.vh = sysInfo.windowHeight
+    this.$apply()
+  }
+
+  async getCategories() {
+    const { data } = await wepy.get('categories')
+    this.categories = data.message
+    console.log(data)
+    this.$apply()
+  }
+}
 </script>
 <style lang="less">
-
+.left{
+  width: 180rpx;
+  background-color: #eee;
+}
 </style>

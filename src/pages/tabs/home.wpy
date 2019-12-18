@@ -56,6 +56,7 @@ export default class extends wepy.page {
 // 轮播图
 swiper-item image{
   height: 100%;
+  width: 100%;
 }
 // 导航样式
 .catitems{
