@@ -5,7 +5,8 @@ export default class extends wepy.mixin {
     vh: 0,  // 视口高度
     categories: {}, // 分类数据
     currentItem: {},  // 当前首页数据
-    activeKey: 0 // 点击索引
+    activeKey: 0, // 点击索引
+    scrollTpo: 0 // 右侧高度
   }
 
   methods = {
@@ -13,6 +14,9 @@ export default class extends wepy.mixin {
     onChoose(e) {
       this.activeKey = e.detail
       this.currentItem = this.categories[this.activeKey]
+
+      // 每次切换让滚动条回到顶部，但要是值都一样，滚动条就不会变
+      this.scrollTpo = this.scrollTpo - 1
     }
   }
 

@@ -11,7 +11,7 @@
   <!-- 侧导航 -->
 
   <!-- 二级分类 -->
-  <scroll-view style="height:{{vh}}px;" scroll-y class="right">
+  <scroll-view style="height:{{vh}}px;" scroll-y class="right" scroll-top="{{scrollTop}}">
     <!-- 单个 -->
     <view wx:for="{{currentItem.children}}" wx:key="cat_id">
       <text class="title" decode>/&nbsp;&nbsp;{{item.cat_name}}&nbsp;&nbsp;/</text>
