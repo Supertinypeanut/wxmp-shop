@@ -19,6 +19,10 @@ export default class extends wepy.app {
       'pages/goods_detail/index',
       'pages/goods_list/index'
     ],
+    usingComponents: {
+      'van-sidebar': './assets/vant/sidebar/index',
+      'van-sidebar-item': './assets/vant/sidebar-item/index'
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#e00',

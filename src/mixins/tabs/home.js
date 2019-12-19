@@ -18,19 +18,19 @@ export default class extends wepy.mixin {
 
   onLoad() {
     // 获取轮播图
-    this.getSwiperList()  
+    this.getSwiperList()
     // 获取导航
-    this.getCatitemsList()  
+    this.getCatitemsList()
     // 获取楼层
     this.getFloordata()
   }
 
   async getSwiperList() {
     const {data} = await wepy.get('home/swiperdata')
-   // 判断是否请求成功，提示
-   if(data.meta.status != 200){
+    // 判断是否请求成功，提示
+    if (data.meta.status != 200) {
       return wepy.baseToast()
-   }  
+    }
     this.swiperList = data.message
     this.$apply()
   }
@@ -38,19 +38,19 @@ export default class extends wepy.mixin {
   async getCatitemsList() {
     const {data} = await wepy.get('home/catitems')
     // 判断是否请求成功，提示
-    if(data.meta.status != 200){
+    if (data.meta.status != 200) {
       return wepy.baseToast()
-    }  
+    }
     this.catitemsList = data.message
     this.$apply()
   }
-  
+
   async getFloordata() {
     const {data} = await wepy.get('home/floordata')
     // 判断是否请求成功，提示
-    if(data.meta.status != 200){
-        return wepy.baseToast()
-    }  
+    if (data.meta.status != 200) {
+      return wepy.baseToast()
+    }
     this.floordata = data.message
     this.$apply()
   }

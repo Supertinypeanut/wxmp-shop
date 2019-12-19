@@ -2,17 +2,24 @@
 <view class="cates">
   <!-- 侧导航 -->
   <scroll-view style="height:{{vh}}px;" scroll-y class="left">
-    <view wx:for="{{categories}}" wx:key="cat_id" @tap="onChoose({{item}})">{{item.cat_name}}</view>
-  </scroll-view>  
+    <van-sidebar active-key="{{ activeKey }}" bind:change="onChoose">
+      <block wx:for="{{categories}}" wx:key="cat_id">
+        <van-sidebar-item title="{{item.cat_name}}" />
+      </block>
+    </van-sidebar>
+  </scroll-view>
   <!-- 侧导航 -->
 
   <!-- 二级分类 -->
   <scroll-view style="height:{{vh}}px;" scroll-y class="right">
     <!-- 单个 -->
     <view wx:for="{{currentItem.children}}" wx:key="cat_id">
-      <view class="title">/{{item.cat_name}}/</view>
+      <text class="title" decode>/&nbsp;&nbsp;{{item.cat_name}}&nbsp;&nbsp;/</text>
       <view class="content">
-        <image src="{{item.cat_icon}}" wx:for="{{item.children}}" wx:key="cat_id"></image>
+        <view class="item" wx:for="{{item.children}}" wx:key="cat_id">
+          <image src="{{item.cat_icon}}" ></image>
+          <text>{{item.cat_name}}</text>
+        </view>
       </view>
     </view>
   </scroll-view>  
@@ -35,28 +42,29 @@ export default class extends wepy.page {
 .cates{
   display: flex;
   .left{
-    width: 180rpx;
-    background-color: #eee;
-    .target{
-      background-color: #4ac;
-    }
-    view{
-      border-bottom: 1rpx solid #000;
-    }
+    width: 33.33%;
   }
   .right{
+    text-align: center;
     .title{
-      text-align: center;
+      line-height: 110rpx;
       font-size: 38rpx;
+      font-weight: bold;
     }
     .content{
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
-      image{
-        width: 100rpx;
-        height: 100rpx;
+      margin-top: -40rpx;
+      .item{
+        width: 140rpx;
+        height: 160rpx;
+        display: flex;
+        flex-direction: column;
         margin: 20rpx;
+        font-size: 20rpx;
+        image{
+          width: 100%;
+        }
       }
     }
   }
