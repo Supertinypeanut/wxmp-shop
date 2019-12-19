@@ -20,10 +20,9 @@ export default class extends wepy.mixin {
     },
 
     // 处理跳转到数据列表
-    onToGoodsList(cid) {
-      console.log(cid)
+    onToGoodsList(item) {
       wepy.navigateTo({
-        url: '/pages/goods_list/index?cid=' + cid
+        url: `/pages/goods_list/index?cid=${item.cat_id}&query=${item.cat_name}`
       })
     }
   }

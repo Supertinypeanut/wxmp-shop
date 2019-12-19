@@ -4,7 +4,7 @@
   <view class="goods">
     <block wx:for="{{ dataList }}" wx:key="index">
       <van-card
-        num="{{item.number}}"
+        num="{{item.goods_number}}"
         price="{{item.goods_price}}"
         title="{{item.goods_name}}"
         thumb="{{ item.goods_small_logo }}"
@@ -16,28 +16,23 @@
 <script>
   import wepy from 'wepy'
 
+  import mixin from '@/mixins/goods_list/index.js'
+
   export default class extends wepy.page {
-    data = {
-      dataList: {}, // 数据列表
-      query: { // 请求参数
-        pagenum: 0,
-        pagesize: 10
-      }
+    config ={
+      // 配置导航条的文本内容
+      navigationBarTitleText: '商品列表',
+      // 上拉加载更多时候的触底距离
+      onReachBottomDistance: 100,
+      // 为当前页面开启下拉刷新
+      enablePullDownRefresh: true,
+      // 下拉刷新窗口的背景色
+      backgroundColor: '#eee',
+      // 下拉刷新 loading 图标的颜色
+      backgroundTextStyle: 'dark'
     }
 
-    onLoad(id) {
-      // 合并请求参数
-      this.query = {...this.query, ...id}
-
-      // 更新数据
-      this.getDataList()
-    }
-
-    // 请求列表数据
-    async getDataList() {
-      const { data } = await wepy.get('goods/search', this.query)
-      this.dataList = [...this.dataList, ...data.message.goods]
-      this.$apply()
-    }
+    // 混入代码
+    mixins = [mixin]
   }
 </script>

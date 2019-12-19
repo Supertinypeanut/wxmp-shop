@@ -54,10 +54,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "pages/goods_list/index",
 					"pathName": "pages/goods_list/index",
-					"query": "cid=10",
+					"query": "cid=10&query=电视",
 					"scene": null
 				}
 			]
