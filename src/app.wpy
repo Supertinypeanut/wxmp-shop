@@ -21,7 +21,8 @@ export default class extends wepy.app {
     ],
     usingComponents: {
       'van-sidebar': './assets/vant/sidebar/index',
-      'van-sidebar-item': './assets/vant/sidebar-item/index'
+      'van-sidebar-item': './assets/vant/sidebar-item/index',
+      'van-card': './assets/vant/card/index'
     },
     window: {
       backgroundTextStyle: 'light',

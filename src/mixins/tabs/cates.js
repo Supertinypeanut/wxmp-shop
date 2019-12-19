@@ -17,6 +17,14 @@ export default class extends wepy.mixin {
 
       // 每次切换让滚动条回到顶部，但要是值都一样，滚动条就不会变
       this.scrollTpo = this.scrollTpo - 1
+    },
+
+    // 处理跳转到数据列表
+    onToGoodsList(cid) {
+      console.log(cid)
+      wepy.navigateTo({
+        url: '/pages/goods_list/index?cid=' + cid
+      })
     }
   }
 

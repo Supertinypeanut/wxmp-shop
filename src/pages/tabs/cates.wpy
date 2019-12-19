@@ -16,7 +16,7 @@
     <view wx:for="{{currentItem.children}}" wx:key="cat_id">
       <text class="title" decode>/&nbsp;&nbsp;{{item.cat_name}}&nbsp;&nbsp;/</text>
       <view class="content">
-        <view class="item" wx:for="{{item.children}}" wx:key="cat_id">
+        <view class="item" wx:for="{{item.children}}" wx:key="cat_id" @tap="onToGoodsList({{item.cat_id}})">
           <image src="{{item.cat_icon}}" ></image>
           <text>{{item.cat_name}}</text>
         </view>

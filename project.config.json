@@ -50,6 +50,14 @@
 					"id": -1,
 					"name": "pages/tabs/cates",
 					"pathName": "pages/tabs/cates",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/goods_list/index",
+					"pathName": "pages/goods_list/index",
+					"query": "cid=10",
 					"scene": null
 				}
 			]

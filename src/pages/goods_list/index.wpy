@@ -1,12 +1,43 @@
 <style lang="less">
 </style>
 <template>
-  <view>list</view>
+  <view class="goods">
+    <block wx:for="{{ dataList }}" wx:key="index">
+      <van-card
+        num="{{item.number}}"
+        price="{{item.goods_price}}"
+        title="{{item.goods_name}}"
+        thumb="{{ item.goods_small_logo }}"
+      />
+    </block>
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
 
   export default class extends wepy.page {
+    data = {
+      dataList: {}, // 数据列表
+      query: { // 请求参数
+        pagenum: 0,
+        pagesize: 10
+      }
+    }
+
+    onLoad(id) {
+      // 合并请求参数
+      this.query = {...this.query, ...id}
+
+      // 更新数据
+      this.getDataList()
+    }
+
+    // 请求列表数据
+    async getDataList() {
+      const { data } = await wepy.get('goods/search', this.query)
+      this.dataList = [...this.dataList, ...data.message.goods]
+      this.$apply()
+    }
   }
 </script>
