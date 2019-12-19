@@ -36,8 +36,20 @@ export default class extends wepy.mixin {
     this.query.pagenum++
   }
 
+  // 下拉刷新
+  onPullDownRefresh() {
+    // 初始化数据
+    this.query.pagenum = 1
+    this.dataList = {}
+    this.isRequest = false
+    this.total = 0
+
+    // 重新请求
+    this.getDataList(() => wepy.stopPullDownRefresh())
+  }
+
   // 请求列表数据
-  async getDataList() {
+  async getDataList(cb) {
     // 更改为请求状态
     this.isRequest = true
 
@@ -49,5 +61,8 @@ export default class extends wepy.mixin {
     // 更改为未请求状态
     this.isRequest = false
     this.$apply()
+
+    // 如果有刷新，手动关闭
+    cb && cb()
   }
 }
