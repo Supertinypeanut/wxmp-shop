@@ -1,10 +1,44 @@
 <template>
-    <!-- 轮播图区域 -->
+  <!-- 轮播图区域 -->
   <swiper indicator-dots circular>
     <swiper-item wx:for="{{goods.pics}}" wx:key="pics_id">
       <image src="{{item.pics_big_url}}" @tap="perview({{item.pics_big_url}})"></image>
     </swiper-item>
   </swiper>
+
+  <!-- 商品信息区域 -->
+  <view class="box1">
+    <view class="price">￥{{goods.goods_price}}</view>
+    <view class="info">
+      <view>{{goods.goods_name}}</view>
+      <view class="collect">
+        <van-icon name="star-o" size="20px" />
+        <text>收藏</text>
+      </view>
+    </view>
+    <view class="fare">运费：免运费</view>
+  </view>
+
+  <!-- 促销、已选 -->
+  <view class="box2">
+    <view class="row">
+      <text class="left">促销</text>
+      <text>满300元减30元</text>
+    </view>
+    <view class="row">
+      <text class="left">已选</text>
+      <text>黑色/S/1件</text>
+    </view>
+  </view>
+
+  <!-- 收货地址 -->
+  <view class="box3">
+    <view class="left">
+      <text class="send">送至</text>
+      <text>***********</text>
+    </view>
+    <van-icon name="arrow" />
+  </view>
 </template>
 
 <script>
@@ -21,6 +55,60 @@ swiper{
   image{
     height: 100%;
     width: 100%;
+  }
+}
+
+// 商品信息区域
+.box1{
+  padding: 0 20rpx;
+  border-bottom: 10rpx solid #efefef;
+  .price{
+    color: red;
+    font-size: 50rpx;
+    padding: 10rpx 0;
+  }
+  .info{
+    display: flex;
+    .collect{
+      width: 200rpx;
+      border-left: 1rpx solid #efefef;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 20rpx;
+    }
+  }
+  .fare{
+    font-size: 30rpx;
+    color: #777;
+    margin: 20rpx 0;
+  }
+}
+
+// 促销、已选
+.box2{
+  font-size: 24rpx;
+  padding: 5rpx 20rpx;
+  color: #666;
+  border-bottom: 12rpx solid #efefef;
+  .row{
+    .left{
+      color: #000;
+      margin-right: 20rpx;
+    }
+  }
+}
+
+// 收货地址
+.box3 {
+  display: flex;
+  justify-content: space-between;
+  padding: 15rpx;
+  font-size: 24rpx;
+  line-height: 45rpx;
+  border-bottom: 12rpx solid #efefef;
+  .send {
+    margin-right: 15rpx;
   }
 }
 </style>
