@@ -35,7 +35,7 @@
   <view class="box3" @tap="chooseAddress">
     <view class="left">
       <text class="send">送至</text>
-      <text>***********</text>
+      <text>{{address}}</text>
     </view>
     <van-icon name="arrow" />
   </view>

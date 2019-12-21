@@ -10,6 +10,18 @@ export default class extends wepy.mixin {
     this.getDetail(options.goods_id)
   }
 
+  computed = {
+    address() {
+      const params = this.$parent.globalData.address
+      return params
+        ? params.provinceName +
+          params.cityName +
+          params.countyName +
+          params.detailInfo
+        : '请选择收货地址'
+    }
+  }
+
   methods = {
     // 图片全屏预览
     perview(url) {
