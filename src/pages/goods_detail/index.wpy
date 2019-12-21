@@ -125,7 +125,7 @@ swiper{
   }
 }
 
-// 图文详情
+// 规格参数
 .attr-row {
   display: flex;
   line-height: 80rpx;

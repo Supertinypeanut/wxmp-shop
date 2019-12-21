@@ -49,6 +49,11 @@ export default class extends wepy.mixin {
       return wepy.baseToast()
     }
 
+    // 把所有 .webp 后缀名结尾的图片,替换为 .jpg
+    data.message.goods_introduce = data.message.goods_introduce.replace(
+        /\.webp/g,
+        '.jpg'
+      )
     this.goods = data.message
     this.$apply()
   }
