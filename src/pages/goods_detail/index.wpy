@@ -41,17 +41,25 @@
   </view>
 
   <!-- 图文详情区域 -->
-  <van-tabs>
+  <van-tabs >
     <van-tab title="图文详情">
       <rich-text nodes="{{goods.goods_introduce}}"></rich-text>
     </van-tab>
-    <van-tab title="规格参数">
+    <van-tab title="规格参数" class="container">
       <view class="attr-row" wx:for="{{goods.attrs}}" wx:key="attr_id">
         <view class="attr-name">{{item.attr_name}}</view>
         <view class="attr-value">{{item.attr_value}}</view>
       </view>
     </van-tab>
   </van-tabs>
+
+  <!-- 商品导航 -->
+  <van-goods-action>
+    <van-goods-action-icon icon="chat-o" text="客服" bind:click="onClickIcon" />
+    <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
+    <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickButton" />
+    <van-goods-action-button text="立即购买" bind:click="onClickButton" />
+  </van-goods-action>
 </template>
 
 <script>
@@ -123,6 +131,14 @@ swiper{
   .send {
     margin-right: 15rpx;
   }
+}
+
+// tab栏切换条
+.van-tabs__line{
+  z-index: 0!important;
+}
+.van-tabs__content{
+  padding-bottom: 100rpx;
 }
 
 // 规格参数
