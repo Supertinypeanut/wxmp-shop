@@ -5,8 +5,10 @@
 </template>
 
 <script>
-  import wepy from 'wepy'
+import wepy from 'wepy'
+import mixin from '@/mixins/goods_detail/index.js'
 
-  export default class extends wepy.page {
-  }
+export default class extends wepy.page {
+  mixins = [mixin]
+}
 </script>

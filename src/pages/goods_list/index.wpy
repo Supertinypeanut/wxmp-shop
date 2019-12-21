@@ -2,12 +2,13 @@
 </style>
 <template>
   <view class="goods">
-    <block wx:for="{{ dataList }}" wx:key="index">
+    <block wx:for="{{ dataList }}" wx:key="index" >
       <van-card
         num="{{item.goods_number}}"
         price="{{item.goods_price}}"
         title="{{item.goods_name}}"
         thumb="{{ item.goods_small_logo }}"
+        @tap="onToGoodDetail({{item.goods_id}})"
       />
     </block>
   </view>

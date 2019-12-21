@@ -65,4 +65,12 @@ export default class extends wepy.mixin {
     // 如果有刷新，手动关闭
     cb && cb()
   }
+
+  methods = {
+    onToGoodDetail(id) {
+      wepy.navigateTo({
+        url: '/pages/goods_detail/index?goods_id=' + id
+      })
+    }
+  }
 }
