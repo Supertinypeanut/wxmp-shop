@@ -20,10 +20,18 @@ export default class extends wepy.app {
       'pages/goods_list/index'
     ],
     usingComponents: {
+      // 按钮
+      'van-button': './assets/vant/button/index',
+      // Sidebar 侧边导航
       'van-sidebar': './assets/vant/sidebar/index',
       'van-sidebar-item': './assets/vant/sidebar-item/index',
+      // Card 商品卡片
       'van-card': './assets/vant/card/index',
-      'van-icon': './assets/vant/icon/index'
+      // Icon 图标
+      'van-icon': './assets/vant/icon/index',
+      // Tab 标签页
+      'van-tab': './assets/vant/tab/index',
+      'van-tabs': './assets/vant/tabs/index'
     },
     window: {
       backgroundTextStyle: 'light',

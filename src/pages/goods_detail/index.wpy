@@ -39,6 +39,19 @@
     </view>
     <van-icon name="arrow" />
   </view>
+
+  <!-- 图文详情区域 -->
+  <van-tabs>
+    <van-tab title="图文详情">
+      <rich-text nodes="{{goods.goods_introduce}}"></rich-text>
+    </van-tab>
+    <van-tab title="规格参数">
+      <view class="attr-row" wx:for="{{goods.attrs}}" wx:key="attr_id">
+        <view class="attr-name">{{item.attr_name}}</view>
+        <view class="attr-value">{{item.attr_value}}</view>
+      </view>
+    </van-tab>
+  </van-tabs>
 </template>
 
 <script>
@@ -109,6 +122,22 @@ swiper{
   border-bottom: 12rpx solid #efefef;
   .send {
     margin-right: 15rpx;
+  }
+}
+
+// 图文详情
+.attr-row {
+  display: flex;
+  line-height: 80rpx;
+  border-top: 1rpx solid #efefef;
+  font-size: 24rpx;
+  .attr-name {
+    border-right: 1rpx solid #efefef;
+    text-align: center;
+    width: 40%;
+  }
+  .attr-value {
+    padding-left: 15rpx;
   }
 }
 </style>
