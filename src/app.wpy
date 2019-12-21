@@ -69,6 +69,39 @@ export default class extends wepy.app {
   }
 
   globalData = {
+    // 收获地址
+    address: null
+  }
+
+  // 设置收获地址
+  setAddress(address) {
+    this.globalData.address = address
+
+    // 持久化地址
+    this.setStorage('address', address)
+  }
+
+  // 数据持久化函数
+  setStorage(key, data) {
+    wepy.setStorage({
+      key,
+      data
+    })
+  }
+
+  // 获取持久化数据
+  async getStorage(key) {
+    const data = await wepy.getStorage({
+      key
+    })
+    console.log(data)
+    // 选择收货地址失败
+    if (data.errMsg !== 'getStorage:ok') {
+      return wepy.baseToast('获取本地数据失败！')
+    }
+
+    // 更新globalData数据对象
+    this.globalData[key] = data.data
   }
 
   constructor () {
@@ -109,6 +142,8 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
+    // 初始化全局数据对象globalData
+    this.getStorage('address')
   }
 }
 </script>

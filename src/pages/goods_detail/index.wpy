@@ -32,7 +32,7 @@
   </view>
 
   <!-- 收货地址 -->
-  <view class="box3">
+  <view class="box3" @tap="chooseAddress">
     <view class="left">
       <text class="send">送至</text>
       <text>***********</text>

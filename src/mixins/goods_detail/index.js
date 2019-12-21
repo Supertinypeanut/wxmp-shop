@@ -17,6 +17,14 @@ export default class extends wepy.mixin {
         urls: this.goods.pics.map(item => item.pics_big_url),
         current: url
       })
+    },
+
+    // 选择地址
+    async chooseAddress() {
+      // 微信地址API
+      const res = await wepy.chooseAddress().catch(err => err)
+      this.$parent.setAddress(res)
+      this.$apply()
     }
   }
 
