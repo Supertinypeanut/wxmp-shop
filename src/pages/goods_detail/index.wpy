@@ -1,7 +1,10 @@
-<style lang="less">
-</style>
 <template>
-  <view>detail<view>
+    <!-- 轮播图区域 -->
+  <swiper indicator-dots circular>
+    <swiper-item wx:for="{{goods.pics}}" wx:key="pics_id">
+      <image src="{{item.pics_big_url}}" @tap="perview({{item.pics_big_url}})"></image>
+    </swiper-item>
+  </swiper>
 </template>
 
 <script>
@@ -12,3 +15,12 @@ export default class extends wepy.page {
   mixins = [mixin]
 }
 </script>
+<style lang="less">
+swiper{
+  height: 750rpx;
+  image{
+    height: 100%;
+    width: 100%;
+  }
+}
+</style>
