@@ -4,12 +4,19 @@ export default class extends wepy.mixin {
   methods = {
     //  更改选中状态
     onChooseChange(e) {
-      console.log(e)
       // 获取id和done
       const id = e.target.dataset.id
       const done = e.detail
       // 触发全局修改选中状态事件
       this.$parent.changeGoodsChoose(id, done)
+    },
+
+    // 全选按钮
+    onAllChooseChange(e) {
+      // 获取选中状态
+      const done = e.detail
+      // 触发全局全选事件
+      this.$parent.changeAllGoodsChoose(done)
     },
 
     // 修改商品数量
@@ -26,6 +33,11 @@ export default class extends wepy.mixin {
     // 购物车数据列表
     carts() {
       return this.$parent.globalData.carts
+    },
+
+    // 购物车全选状态
+    allDone() {
+      return this.$parent.globalData.carts.every(item => item.isChoose)
     }
   }
 }

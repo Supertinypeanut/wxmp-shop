@@ -144,6 +144,11 @@ export default class extends wepy.app {
     this.setStorage()
   }
 
+  // 修改购物车所有商品状态
+  changeAllGoodsChoose(done) {
+    this.globalData.carts.forEach(item => { item.isChoose = done })
+  }
+
   // 数据持久化函数
   setStorage() {
     wepy.setStorageSync('globalData', this.globalData)

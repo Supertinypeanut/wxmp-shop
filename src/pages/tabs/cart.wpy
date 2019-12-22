@@ -22,9 +22,8 @@
       price="{{ 3050 }}"
       button-text="提交订单"
       bind:submit="onClickButton"
-      tip="{{ true }}"
     >
-      <van-checkbox class="allChoose" value="{{ true }}" @change="onAllChooseChange" data-id="{{item.id}}" checked-color="#e00">全选</van-checkbox>
+      <van-checkbox class="allChoose" value="{{ allDone }}" @change="onAllChooseChange" checked-color="#e00">全选</van-checkbox>
     </van-submit-bar>
   </view>
 </template>
