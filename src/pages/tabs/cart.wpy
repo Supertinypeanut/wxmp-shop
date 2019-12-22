@@ -1,12 +1,52 @@
-<style lang="less">
-</style>
 <template>
-  <view>cart<view>
+  <view>
+    <van-cell title="购物车列表" icon="shop-o" />
+    <!-- 列表 -->
+    <block wx:for="{{carts}}" wx:key="index">
+      <van-card
+        title="{{item.name}}"
+      >
+        <view slot="thumb" class="itemLeft">
+          <van-checkbox value="{{ true }}" bind:change="onChange"></van-checkbox>
+          <image src="{{ item.pic }}"></image>
+        </view>
+        <view slot="bottom" class="bottom">
+          <text>{{item.price}}</text>
+          <van-stepper value="{{ item.num }}" bind:change="onChange" />
+        </view>
+      </van-card>
+    </block> 
+
+  </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
+import wepy from 'wepy'
+import mixin from '@/mixins/tabs/cart.js'
 
-  export default class extends wepy.page {
-  }
+export default class extends wepy.page {
+  mixins = [ mixin ]
+}
 </script>
+
+<style lang="less">
+// 商品列表
+.itemLeft{
+  display: flex;
+  align-items: center;
+  image{
+    height: 88px;
+    width: 88px;
+  }
+}
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  text{
+    color: #e00;
+    font-size: 30rpx;
+  }
+}
+</style>

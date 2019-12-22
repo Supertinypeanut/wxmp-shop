@@ -1,5 +1,5 @@
 <style lang="less">
-
+@import "./assets/vant/common/index.wxss";
 </style>
 
 <script>
@@ -35,7 +35,13 @@ export default class extends wepy.app {
       // GoodsAction 商品导航
       'van-goods-action': './assets/vant/goods-action/index',
       'van-goods-action-icon': './assets/vant/goods-action-icon/index',
-      'van-goods-action-button': './assets/vant/goods-action-button/index'
+      'van-goods-action-button': './assets/vant/goods-action-button/index',
+      //  Cell 单元格
+      'van-cell': './assets/vant/cell/index',
+      // 复选框
+      'van-checkbox': './assets/vant/checkbox/index',
+      // Stepper 步进器
+      'van-stepper': './assets/vant/stepper/index'
     },
     window: {
       backgroundTextStyle: 'light',
