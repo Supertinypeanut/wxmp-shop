@@ -12,7 +12,7 @@
         </view>
         <view slot="bottom" class="bottom">
           <text>{{item.price}}</text>
-          <van-stepper value="{{ item.num }}" bind:change="onChange" />
+          <van-stepper value="{{ item.num }}" @change="onNumChange" data-id="{{item.id}}" />
         </view>
       </van-card>
     </block> 

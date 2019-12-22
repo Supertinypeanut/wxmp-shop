@@ -132,6 +132,16 @@ export default class extends wepy.app {
     this.setStorage()
   }
 
+  // 设置是否选中购物车商品状态
+  changeGoodsNum(id, value) {
+    // 获取添加的商品是否存在购物车的索引
+    const index = this.getEqualIdIndex(id)
+    // 更改对应商品选中状态
+    this.globalData.carts[index].num = value
+    // 数据持久化
+    this.setStorage()
+  }
+
   // 数据持久化函数
   setStorage() {
     wepy.setStorageSync('globalData', this.globalData)

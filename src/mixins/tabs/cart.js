@@ -8,10 +8,20 @@ export default class extends wepy.mixin {
       // 获取id和done
       const id = e.target.dataset.id
       const done = e.detail
-    // 触发全局修改选中状态事件
+      // 触发全局修改选中状态事件
       this.$parent.changeGoodsChoose(id, done)
+    },
+
+    // 修改商品数量
+    onNumChange(e) {
+      // 获取id和value
+      const id = e.target.dataset.id
+      const value = e.detail
+      // 触发全局修改商品数量
+      this.$parent.changeGoodsNum(id, value)
     }
   }
+
   computed = {
     // 购物车数据列表
     carts() {
