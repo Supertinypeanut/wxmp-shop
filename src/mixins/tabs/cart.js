@@ -23,9 +23,18 @@ export default class extends wepy.mixin {
     onNumChange(e) {
       // 获取id和value
       const id = e.target.dataset.id
-      const value = e.detail
+      const value = parseInt(e.detail) || 1
+
       // 触发全局修改商品数量
       this.$parent.changeGoodsNum(id, value)
+    },
+
+    // 到商品详情页
+    onNavigateTo(id) {
+      console.log(id)
+      wepy.navigateTo({
+        url: `/pages/goods_detail/index?goods_id=${id}`
+      })
     }
   }
 

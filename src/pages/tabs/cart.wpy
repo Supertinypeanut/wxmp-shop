@@ -3,15 +3,14 @@
     <van-cell title="购物车列表" icon="shop-o" />
     <!-- 列表 -->
     <block wx:for="{{carts}}" wx:key="index">
-      <van-card
-        title="{{item.name}}"
-      >
+      <van-card>
+        <view class="title" slot="title" @tap="onNavigateTo({{item.id}})">{{item.name}}</view>
         <view slot="thumb" class="itemLeft">
           <van-checkbox value="{{ item.isChoose }}" @change="onChooseChange" data-id="{{item.id}}" checked-color="#e00"></van-checkbox>
-          <image src="{{ item.pic }}"></image>
+          <image src="{{ item.pic }}" @tap="onNavigateTo({{item.id}})"></image>
         </view>
         <view slot="bottom" class="bottom">
-          <text>{{item.price}}</text>
+          <text @tap="onNavigateTo({{item.id}})">{{item.price}}</text>
           <van-stepper value="{{ item.num }}" @change="onNumChange" data-id="{{item.id}}" />
         </view>
       </van-card>
@@ -44,6 +43,9 @@ export default class extends wepy.page {
 }
 
 // 单个商品
+.title{
+  font-weight: bold;
+}
 .van-card__thumb{
   width: 110px!important;
 }
