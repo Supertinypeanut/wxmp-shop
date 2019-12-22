@@ -105,7 +105,13 @@ export default class extends wepy.app {
       price: goods.goods_price, // 商品价格
       pic: goods.pics[0].pics_mid  // 商品图片
     }
-    this.globalData.carts.push(item)
+
+    // 获取添加的商品是否存在购物车的索引
+    const index = this.globalData.carts.findIndex(x => x.id === item.id)
+
+    // 判断是否是商品加1，还是添加新商品
+    index !== -1 ? this.globalData.carts[index].num++ : this.globalData.carts.push(item)
+
     // 持久化数据
     this.setStorage()
   }
