@@ -95,24 +95,19 @@ export default class extends wepy.app {
 
   // 数据持久化函数
   setStorage() {
-    wepy.setStorage({
-      key: 'globalData',
-      data: this.globalData
-    })
+    wepy.setStorageSync('globalData', this.globalData)
   }
 
   // 获取持久化数据
-  async getStorage() {
-    const data = await wepy.getStorage({
-      key: 'globalData'
-    }).catch(err => err)
+  getStorage() {
+    const data = wepy.getStorageSync('globalData')
     // 选择收货地址失败
-    if (data.errMsg !== 'getStorage:ok') {
+    if (data === null) {
       return wepy.baseToast('获取本地数据失败！')
     }
-
+    console.log(data)
     // 更新globalData数据对象
-    this.globalData = data.data
+    this.globalData = data
   }
 
   constructor () {
