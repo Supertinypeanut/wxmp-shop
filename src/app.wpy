@@ -113,12 +113,22 @@ export default class extends wepy.app {
     }
 
     // 获取添加的商品是否存在购物车的索引
-    const index = this.globalData.carts.findIndex(x => x.id === item.id)
+    const index = this.getEqualIdIndex(item.id)
 
     // 判断是否是商品加1，还是添加新商品
     index !== -1 ? this.globalData.carts[index].num++ : this.globalData.carts.push(item)
 
     // 持久化数据
+    this.setStorage()
+  }
+
+  // 设置是否选中购物车商品状态
+  changeGoodsChoose(id, done) {
+    // 获取添加的商品是否存在购物车的索引
+    const index = this.getEqualIdIndex(id)
+    // 更改对应商品选中状态
+    this.globalData.carts[index].isChoose = done
+    // 数据持久化
     this.setStorage()
   }
 
@@ -136,6 +146,11 @@ export default class extends wepy.app {
     }
     // 更新globalData数据对象
     this.globalData = data
+  }
+
+  // 根据id获取carts中相同id商品的索引
+  getEqualIdIndex(id) {
+    return this.globalData.carts.findIndex(x => x.id === id)
   }
 
   constructor () {

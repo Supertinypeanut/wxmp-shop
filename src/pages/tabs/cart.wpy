@@ -7,7 +7,7 @@
         title="{{item.name}}"
       >
         <view slot="thumb" class="itemLeft">
-          <van-checkbox value="{{ true }}" bind:change="onChange"></van-checkbox>
+          <van-checkbox value="{{ item.isChoose }}" @change="onChooseChange" data-id="{{item.id}}" checked-color="#e00"></van-checkbox>
           <image src="{{ item.pic }}"></image>
         </view>
         <view slot="bottom" class="bottom">
@@ -31,12 +31,16 @@ export default class extends wepy.page {
 
 <style lang="less">
 // 商品列表
+.van-card__thumb{
+  width: 110px!important;
+}
 .itemLeft{
   display: flex;
   align-items: center;
   image{
     height: 88px;
     width: 88px;
+    margin-left: 10rpx;
   }
 }
 .bottom{
