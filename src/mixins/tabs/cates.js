@@ -49,4 +49,9 @@ export default class extends wepy.mixin {
     this.currentItem = data.message[0]
     this.$apply()
   }
+
+  onShow () {
+    // 设置购物车选中徽标数量
+    this.$parent.setTabBarBadge()
   }
+}

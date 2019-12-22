@@ -8,5 +8,9 @@
   import wepy from 'wepy'
 
   export default class extends wepy.page {
+    onShow () {
+    // 设置购物车选中徽标数量
+      this.$parent.setTabBarBadge()
+    }
   }
 </script>

@@ -92,7 +92,9 @@ export default class extends wepy.app {
     // 收获地址
     address: null,
     // 购物车
-    carts: []
+    carts: [],
+    // 选中商品中数
+    total: 0
   }
 
   // 设置收获地址
@@ -154,6 +156,11 @@ export default class extends wepy.app {
 
   // 数据持久化函数
   setStorage() {
+    // 更新商品选中总数
+    this.getTotal()
+    // 设置购物车选中徽标数量
+    this.setTabBarBadge()
+    // 持久化全局数据
     wepy.setStorageSync('globalData', this.globalData)
   }
 
@@ -171,6 +178,27 @@ export default class extends wepy.app {
   // 根据id获取carts中相同id商品的索引
   getEqualIdIndex(id) {
     return this.globalData.carts.findIndex(x => x.id === id)
+  }
+
+  // 获取选中的商品数
+  getTotal() {
+    let counts = 0
+    this.globalData.carts.forEach(item => {
+      // 判断商品是否选中
+      if (item.isChoose) {
+        counts += item.num
+      }
+    })
+    // 更新选中商品总数
+    this.globalData.total = counts
+  }
+
+  setTabBarBadge() {
+    // 设置购物车tabbar数量
+    wepy.setTabBarBadge({
+      index: 3,
+      text: `${this.globalData.total}`
+    })
   }
 
   constructor () {

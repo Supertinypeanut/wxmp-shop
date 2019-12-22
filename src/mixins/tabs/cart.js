@@ -43,6 +43,7 @@ export default class extends wepy.mixin {
     // 获取合计
     total() {
       let params = 0
+      // 计算所有选中商品的价格
       this.$parent.globalData.carts.forEach(item => {
         if (item.isChoose) {
           params += item.num * item.price
@@ -50,5 +51,10 @@ export default class extends wepy.mixin {
       })
       return params * 100
     }
+  }
+
+  onShow () {
+    // 设置购物车选中徽标数量
+    this.$parent.setTabBarBadge()
   }
 }
