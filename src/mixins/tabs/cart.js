@@ -38,6 +38,17 @@ export default class extends wepy.mixin {
     // 购物车全选状态
     allDone() {
       return this.$parent.globalData.carts.every(item => item.isChoose)
+    },
+
+    // 获取合计
+    total() {
+      let params = 0
+      this.$parent.globalData.carts.forEach(item => {
+        if (item.isChoose) {
+          params += item.num * item.price
+        }
+      })
+      return params * 100
     }
   }
 }

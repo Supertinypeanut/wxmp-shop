@@ -19,7 +19,7 @@
 
     <!-- 提交订单 -->
     <van-submit-bar
-      price="{{ 3050 }}"
+      price="{{ total }}"
       button-text="提交订单"
       bind:submit="onClickButton"
     >
