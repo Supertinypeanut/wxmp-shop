@@ -82,7 +82,9 @@ export default class extends wepy.app {
 
   globalData = {
     // 收获地址
-    address: null
+    address: null,
+    // 购物车
+    carts: []
   }
 
   // 设置收获地址
@@ -90,6 +92,21 @@ export default class extends wepy.app {
     this.globalData.address = address
 
     // 持久化地址
+    this.setStorage()
+  }
+
+  // 添加商品到购物车
+  addCart(goods) {
+    const item = {
+      id: goods.goods_id, // 商品id
+      isChoose: true,  // 是否选中
+      num: 1, // 商品数量
+      name: goods.goods_name, // 商品名称
+      price: goods.goods_price, // 商品价格
+      pic: goods.pics[0].pics_mid  // 商品图片
+    }
+    this.globalData.carts.push(item)
+    // 持久化数据
     this.setStorage()
   }
 
@@ -102,10 +119,9 @@ export default class extends wepy.app {
   getStorage() {
     const data = wepy.getStorageSync('globalData')
     // 选择收货地址失败
-    if (data === null) {
-      return wepy.baseToast('获取本地数据失败！')
+    if (!data) {
+      return
     }
-    console.log(data)
     // 更新globalData数据对象
     this.globalData = data
   }

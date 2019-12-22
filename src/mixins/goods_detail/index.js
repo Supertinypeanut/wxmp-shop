@@ -37,6 +37,11 @@ export default class extends wepy.mixin {
       const res = await wepy.chooseAddress().catch(err => err)
       this.$parent.setAddress(res)
       this.$apply()
+    },
+
+    // 加入购物车
+    onAddGoods() {
+      this.$parent.addCart(this.goods)
     }
   }
 
