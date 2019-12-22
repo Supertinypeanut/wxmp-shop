@@ -41,7 +41,9 @@ export default class extends wepy.app {
       // 复选框
       'van-checkbox': './assets/vant/checkbox/index',
       // Stepper 步进器
-      'van-stepper': './assets/vant/stepper/index'
+      'van-stepper': './assets/vant/stepper/index',
+      // 提交订单栏
+      'van-submit-bar': './assets/vant/submit-bar/index'
     },
     window: {
       backgroundTextStyle: 'light',

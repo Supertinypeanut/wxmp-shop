@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="list">
     <van-cell title="购物车列表" icon="shop-o" />
     <!-- 列表 -->
     <block wx:for="{{carts}}" wx:key="index">
@@ -17,6 +17,15 @@
       </van-card>
     </block> 
 
+    <!-- 提交订单 -->
+    <van-submit-bar
+      price="{{ 3050 }}"
+      button-text="提交订单"
+      bind:submit="onClickButton"
+      tip="{{ true }}"
+    >
+      <van-checkbox class="allChoose" value="{{ true }}" @change="onAllChooseChange" data-id="{{item.id}}" checked-color="#e00">全选</van-checkbox>
+    </van-submit-bar>
   </view>
 </template>
 
@@ -30,7 +39,12 @@ export default class extends wepy.page {
 </script>
 
 <style lang="less">
-// 商品列表
+// 处理列表向最后被遮盖问题
+.list{
+  padding-bottom: 100rpx;
+}
+
+// 单个商品
 .van-card__thumb{
   width: 110px!important;
 }
@@ -53,4 +67,10 @@ export default class extends wepy.page {
     font-size: 30rpx;
   }
 }
+
+// 提交栏样式
+.allChoose{
+  margin-left: 30rpx;
+}
+
 </style>
