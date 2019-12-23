@@ -6,7 +6,7 @@ export default class extends wepy.mixin {
   }
 
   methods = {
-        // 监听搜索框改变
+    // 监听搜索框改变
     async onChange(e) {
           // 搜索关键词
       const query = e.detail
@@ -19,6 +19,14 @@ export default class extends wepy.mixin {
           // 更新响应数据
       this.responseData = data.message
       this.$apply()
+    },
+
+    // 点击下拉联想跳转详情页
+    onSearchTo(id) {
+      console.log(id)
+      wepy.navigateTo({
+        url: `/pages/goods_detail/index?goods_id=${id}`
+      })
     }
   }
   onShow () {

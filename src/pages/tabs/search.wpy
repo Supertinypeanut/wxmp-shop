@@ -13,7 +13,7 @@
 
     <!-- 联想建议 -->
     <block wx:for="{{responseData}}" wx:key="index">
-      <view class="van-ellipsis item">
+      <view class="van-ellipsis item" @tap="onSearchTo({{item.goods_id}})">
         {{item.goods_name}}
       </view>
     </block>
