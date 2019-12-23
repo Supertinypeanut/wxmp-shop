@@ -12,15 +12,15 @@
     <!-- 搜索框 -->
 
     <!-- 联想建议 -->
-    <block wx:for="{{responseData}}" wx:key="index">
-      <view class="van-ellipsis item" @tap="onSearchTo({{item.goods_id}})">
+    <block wx:if="{{!showHistory}}">
+      <view wx:for="{{responseData}}" wx:key="index" class="van-ellipsis item" @tap="onSearchTo({{item.goods_id}})">
         {{item.goods_name}}
       </view>
     </block>
     <!-- 联想建议 -->
 
     <!-- 历史记录 -->
-      <van-cell use-label-slot title="历史记录" border="{{ false }}" >
+      <van-cell wx:else use-label-slot title="历史记录" border="{{ false }}" >
         <view slot="label">
           <van-tag round wx:for="{{history}}" wx:key="index">{{item}}</van-tag>
         </view>

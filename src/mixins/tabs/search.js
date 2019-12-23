@@ -12,6 +12,11 @@ export default class extends wepy.mixin {
     //  历史记录
     history() {
       return this.$parent.globalData.history
+    },
+
+    // 是否显示历史记录
+    showHistory() {
+      return this.responseData.length === 0
     }
   }
 
