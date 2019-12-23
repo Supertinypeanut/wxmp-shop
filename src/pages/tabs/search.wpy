@@ -1,5 +1,6 @@
 <template>
   <view>
+    <!-- 搜索框 -->
     <van-search
       value="{{ value }}"
       placeholder="请输入搜索关键词"
@@ -8,39 +9,33 @@
       bind:cancel="onCancel"
       @change="onChange"
     />  
-  <view>
+    <!-- 搜索框 -->
+
+    <!-- 联想建议 -->
+    <block wx:for="{{responseData}}" wx:key="index">
+      <view class="van-ellipsis item">
+        {{item.goods_name}}
+      </view>
+    </block>
+
+    <!-- 联想建议 -->
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import mixin from '@/mixins/tabs/search.js'
 
   export default class extends wepy.page {
-    data = {
-      responseData: []
-    }
-
-    methods = {
-      // 监听搜索框改变
-      async onChange(e) {
-        // 搜索关键词
-        const query = e.detail
-        // 发送请求
-        const { data } = await wepy.get('goods/qsearch', {query})
-        // 判断是请求成功
-        if (data.meta.status !== 200) {
-          return wepy.baseToast()
-        }
-        console.log(data.message)
-        // 更新响应数据
-        this.responseData = data.message
-        this.$apply()
-      }
-    }
-    onShow () {
-    // 设置购物车选中徽标数量
-      this.$parent.setTabBarBadge()
-    }
+    mixins = [mixin]
   }
 </script>
 <style lang="less">
+// 搜索建议
+.item{
+  padding:10rpx 20rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  border-bottom: 1rpx solid #efefef;
+}
 </style>
