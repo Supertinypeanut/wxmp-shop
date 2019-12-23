@@ -4,7 +4,7 @@
     <!-- 列表 -->
     <block wx:for="{{carts}}" wx:key="index">
       <van-card>
-        <view class="title" slot="title" @tap="onNavigateTo({{item.id}})">{{item.name}}</view>
+        <view class="title van-multi-ellipsis--l2" slot="title" @tap="onNavigateTo({{item.id}})">{{item.name}}</view>
         <view slot="thumb" class="itemLeft">
           <van-checkbox value="{{ item.isChoose }}" @change="onChooseChange" data-id="{{item.id}}" checked-color="#e00"></van-checkbox>
           <image src="{{ item.pic }}" @tap="onNavigateTo({{item.id}})"></image>
