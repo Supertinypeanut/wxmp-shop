@@ -45,7 +45,9 @@ export default class extends wepy.app {
       // 提交订单栏
       'van-submit-bar': './assets/vant/submit-bar/index',
       // 搜索框
-      'van-search': './assets/vant/search/index'
+      'van-search': './assets/vant/search/index',
+      // Tag标签
+      'van-tag': './assets/vant/tag/index'
     },
     window: {
       backgroundTextStyle: 'light',
@@ -96,7 +98,9 @@ export default class extends wepy.app {
     // 购物车
     carts: [],
     // 选中商品中数
-    total: 0
+    total: 0,
+    // 搜索历史记录
+    history: []
   }
 
   // 设置收获地址
@@ -156,6 +160,15 @@ export default class extends wepy.app {
     this.setStorage()
   }
 
+  // 修改历史记录
+  setHistory(str) {
+    // 搜索历史数组去重
+    const set = new Set([str, ...this.globalData.history])
+    this.globalData.history = Array.from(set)
+    // 数据持久化
+    this.setStorage()
+  }
+
   // 数据持久化函数
   setStorage() {
     // 更新商品选中总数
@@ -195,6 +208,7 @@ export default class extends wepy.app {
     this.globalData.total = counts
   }
 
+  // 设置购物车tabbar数量
   setTabBarBadge() {
     // 设置购物车tabbar数量
     wepy.setTabBarBadge({

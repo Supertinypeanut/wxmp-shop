@@ -5,8 +5,8 @@
       value="{{ value }}"
       placeholder="请输入搜索关键词"
       show-action
-      bind:search="onSearch"
-      bind:cancel="onCancel"
+      @search="onSearch"
+      @cancel="onCancel"
       @change="onChange"
     />  
     <!-- 搜索框 -->
@@ -17,8 +17,15 @@
         {{item.goods_name}}
       </view>
     </block>
-
     <!-- 联想建议 -->
+
+    <!-- 历史记录 -->
+      <van-cell use-label-slot title="历史记录" border="{{ false }}" >
+        <view slot="label">
+          <van-tag round wx:for="{{history}}" wx:key="index">{{item}}</van-tag>
+        </view>
+      </van-cell>
+    <!-- 历史记录 -->
   </view>
 </template>
 
@@ -37,5 +44,10 @@
   font-size: 26rpx;
   font-weight: bold;
   border-bottom: 1rpx solid #efefef;
+}
+
+// 历史记录
+van-tag{
+  margin-right: 10rpx;
 }
 </style>

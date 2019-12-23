@@ -8,6 +8,13 @@ export default class extends wepy.mixin {
     timer: undefined
   }
 
+  computed = {
+    //  历史记录
+    history() {
+      return this.$parent.globalData.history
+    }
+  }
+
   methods = {
     // 监听搜索框改变
     onChange(e) {
@@ -19,6 +26,9 @@ export default class extends wepy.mixin {
         const query = String.prototype.trim.call(e.detail)
       // 对搜索词进行非空校验和请求是否完成校验
         if (!query) {
+          // 清空联想数组
+          this.responseData = []
+          this.$apply()
           return
         }
 
@@ -34,9 +44,23 @@ export default class extends wepy.mixin {
       }, 500)
     },
 
+    // 搜索事件
+    onSearch(e) {
+      const str = e.detail
+      // 更新全局历史记录
+      this.$parent.setHistory(str)
+    },
+
+    // 清空搜索框内容
+    onCancel() {
+      this.responseData = []
+      this.$apply()
+    },
+
     // 点击下拉联想跳转详情页
     onSearchTo(id) {
-      console.log(id)
+      // 清空下拉联想
+      this.responseData = []
       wepy.navigateTo({
         url: `/pages/goods_detail/index?goods_id=${id}`
       })
