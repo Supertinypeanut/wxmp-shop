@@ -51,9 +51,17 @@ export default class extends wepy.mixin {
 
     // 搜索事件
     onSearch(e) {
-      const str = e.detail
+      const str = String.prototype.trim.call(e.detail)
+      if (!str) {
+        return
+      }
+      this.responseData = []
       // 更新全局历史记录
       this.$parent.setHistory(str)
+      this.$apply()
+      wepy.navigateTo({
+        url: `/pages/goods_list/index?query=${str}`
+      })
     },
 
     // 清空搜索框内容
@@ -68,6 +76,13 @@ export default class extends wepy.mixin {
       this.responseData = []
       wepy.navigateTo({
         url: `/pages/goods_detail/index?goods_id=${id}`
+      })
+    },
+
+    // 点击历史记录跳转商品列表页
+    onQueryHistory(queryStr) {
+      wepy.navigateTo({
+        url: `/pages/goods_list/index?query=${queryStr}`
       })
     }
   }

@@ -22,7 +22,7 @@
     <!-- 历史记录 -->
       <van-cell wx:else use-label-slot title="历史记录" border="{{ false }}" >
         <view slot="label">
-          <van-tag round wx:for="{{history}}" wx:key="index">{{item}}</van-tag>
+          <van-tag round wx:for="{{history}}" wx:key="index" @tap="onQueryHistory({{item}})">{{item}}</van-tag>
         </view>
       </van-cell>
     <!-- 历史记录 -->
