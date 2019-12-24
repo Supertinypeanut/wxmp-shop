@@ -6,6 +6,7 @@ export default class extends wepy.mixin {
     address() {
       return this.$parent.globalData.address
     },
+
     // 地址拼接
     addressStr() {
         // 接收地址对象
@@ -14,6 +15,11 @@ export default class extends wepy.mixin {
         return ''
       }
       return address.provinceName + address.cityName + address.countyName + address.detailInfo
+    },
+
+    // 勾选商品列表
+    chooseGoods() {
+      return this.$parent.globalData.carts.filter(item => item.isChoose)
     }
   }
 
@@ -25,9 +31,5 @@ export default class extends wepy.mixin {
       this.$parent.setAddress(address)
       this.$apply()
     }
-  }
-
-  onShow() {
-
   }
 }
