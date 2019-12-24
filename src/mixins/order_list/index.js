@@ -37,6 +37,19 @@ export default class extends wepy.mixin {
     // 获取token对象
     token() {
       return this.$parent.globalData.token
+    },
+
+    // 创建订单的goods字段
+    goods() {
+      let params = []
+      this.chooseGoods.forEach(item => {
+        params.push({
+          goods_id: item.id,
+          goods_number: item.num,
+          goods_price: item.price
+        })
+      })
+      return params
     }
   }
 
@@ -50,8 +63,25 @@ export default class extends wepy.mixin {
     },
 
     // 支付按钮
-    onSubmitOrder() {
-      console.log(77)
+    async onSubmitOrder() {
+        // 创建订单
+      const res = await wepy.post('my/orders/create', {
+        order_price: this.goodsTotal,
+        consignee_addr: this.addressStr,
+        goods: this.goods
+      })
+
+      // 对订单响应处理判断
+      if (res.errMsg !== 'request:ok') {
+        return wepy.baseToast('创建订单失败')
+      }
+
+    // 获取订单编号
+      const order_number = res.data.message || 'test123456'
+
+    //   wepy.navigateTo({
+    //       url:''
+    //   })
     },
 
     // 获取用户信息
