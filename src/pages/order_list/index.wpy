@@ -27,17 +27,18 @@
     />
     <!-- 商品列表 -->
 
-    <!-- 登入授权按钮 -->
-    <button class="loginBtn" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">请先登录授权</button>
-    <!-- 登入授权按钮 -->
-
     <!-- 支付按钮 -->
-    <!-- <van-submit-bar
+    <van-submit-bar
+      wx:if="{{token}}"
       price="{{ goodsTotal }}"
       button-text="支付订单"
       @submit="onSubmitOrder"
-    /> -->
+    />
     <!-- 支付按钮 -->
+
+    <!-- 登入授权按钮 -->
+    <button wx:else class="loginBtn" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">请先登录授权</button>
+    <!-- 登入授权按钮 -->
   </view>
 </template>
 

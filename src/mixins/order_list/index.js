@@ -68,6 +68,7 @@ export default class extends wepy.mixin {
         return wepy.baseToast('授权失败')
       }
 
+      // 获取对象对应的属性
       const { encryptedData, rawData, iv, signature, code } = {...res, ...userInfo.detail}
 
       // 处理请求参数对象
@@ -81,6 +82,16 @@ export default class extends wepy.mixin {
       // 更新用户登录请求对象
       this.wxloginQuery = wxloginQuery
 
+      // 获取token
+      const tokenRes = await wepy.post('users/wxlogin', wxloginQuery)
+      // 校验token是否成功
+      if (tokenRes.errMsg !== 'request:ok') {
+        return wepy.baseToast('token获取失败')
+      }
+
+      const token = tokenRes.data.message || 'Bearer token'
+      // 设置全局token
+      this.$parent.setToken(token)
       this.$apply()
     }
   }

@@ -172,6 +172,13 @@ export default class extends wepy.app {
     this.setStorage()
   }
 
+  // 设置Token
+  setToken(token) {
+    this.globalData.token = token
+
+    this.setStorage()
+  }
+
   // 数据持久化函数
   setStorage() {
     // 更新商品选中总数
