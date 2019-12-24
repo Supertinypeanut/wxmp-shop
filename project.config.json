@@ -82,9 +82,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "pages/order_list/index",
-					"pathName": "pages/order_list/index",
+					"pathName": "pages/order/index",
+					"query": "",
 					"scene": null
 				}
 			]

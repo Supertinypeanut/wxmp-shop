@@ -40,7 +40,7 @@ export default class extends wepy.mixin {
     // 提交订单
     onSubmitOrder(e) {
       wepy.navigateTo({
-        url: '/pages/order_list/index'
+        url: '/pages/order/index'
       })
     }
   }

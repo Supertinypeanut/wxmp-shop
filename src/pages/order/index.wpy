@@ -1,0 +1,91 @@
+<template>
+  <view>
+    <!-- 收获地址 -->
+    <view class="address">
+        <van-cell wx:if="{{ address }}" use-label-slot @tap="onChooseAddress" border="{{false}}">
+              <view class="titel" slot="title">
+                  <text>收货人:{{address.userName}}</text> 
+                  <view>联系电话:{{address.telNumber}}<van-icon name="arrow" /></view>
+              </view>
+              <view class="addressStr" slot="label">收获地址:{{addressStr}}</view>
+        </van-cell>
+        <view wx:else class="addressButton">
+          <van-button type="default" size="small" @click="onChooseAddress">+请添加收获地址</van-button>
+        </view>
+        <image src="/assets/images/cart_border@2x.png"></image>
+    </view>
+    <!-- 收获地址 -->
+
+    <!-- 商品列表 -->
+    <van-card
+      wx:for="{{chooseGoods}}"
+      wx:key="index"
+      num="{{item.num}}"
+      price="{{item.price}}"
+      title="{{item.name}}"
+      thumb="{{ item.pic }}"
+    />
+    <!-- 商品列表 -->
+
+    <!-- 支付按钮 -->
+    <van-submit-bar
+      wx:if="{{token}}"
+      price="{{ goodsTotal }}"
+      button-text="支付订单"
+      @submit="onSubmitOrder"
+    />
+    <!-- 支付按钮 -->
+
+    <!-- 登入授权按钮 -->
+    <button wx:else class="loginBtn" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">请先登录授权</button>
+    <!-- 登入授权按钮 -->
+
+    <!-- Toast轻提示 -->
+    <van-toast id="custom-selector" />
+    <!-- Toast轻提示 -->
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import mixin from '../../mixins/order/index.js'
+export default class extends wepy.page {
+  config = {
+    navigationBarTitleText: '确认订单'
+  }
+  mixins = [mixin]
+}
+</script>
+
+<style lang="less">
+// 地址样式
+.titel{
+    display: flex;
+    justify-content: space-between;
+}
+.addressStr{
+    color: #000;
+    font-size: 26rpx;
+}
+image{
+    width: 100%;
+    height: 10rpx;
+}
+.addressButton{
+    display: flex;
+    justify-content:center;
+    margin-top: 20rpx;
+}
+
+// 登入授权按钮
+.loginBtn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+// 支付按钮
+.van-submit-bar__bar{
+    background-color: #eee!important;
+}
+</style>
