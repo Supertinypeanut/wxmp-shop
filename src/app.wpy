@@ -101,7 +101,9 @@ export default class extends wepy.app {
     // 选中商品中数
     total: 0,
     // 搜索历史记录
-    history: []
+    history: [],
+    // token
+    token: null
   }
 
   // 设置收获地址

@@ -27,12 +27,16 @@
     />
     <!-- 商品列表 -->
 
+    <!-- 登入授权按钮 -->
+    <button class="loginBtn" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">请先登录授权</button>
+    <!-- 登入授权按钮 -->
+
     <!-- 支付按钮 -->
-    <van-submit-bar
+    <!-- <van-submit-bar
       price="{{ goodsTotal }}"
       button-text="支付订单"
-      bind:submit="onSubmit"
-    />
+      @submit="onSubmitOrder"
+    /> -->
     <!-- 支付按钮 -->
   </view>
 </template>
@@ -63,6 +67,13 @@ image{
     display: flex;
     justify-content:center;
     margin-top: 20rpx;
+}
+
+// 登入授权按钮
+.loginBtn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 // 支付按钮
