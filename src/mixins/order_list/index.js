@@ -64,20 +64,11 @@ export default class extends wepy.mixin {
 
     // 支付按钮
     async onSubmitOrder() {
-        // 创建订单
-      const res = await wepy.post('my/orders/create', {
-        order_price: this.goodsTotal,
-        consignee_addr: this.addressStr,
-        goods: this.goods
-      })
+      // 获取订单编号
+      const order_number = await this.newOrder()
 
-      // 对订单响应处理判断
-      if (res.errMsg !== 'request:ok') {
-        return wepy.baseToast('创建订单失败')
-      }
-
-    // 获取订单编号
-      const order_number = res.data.message || 'test123456'
+      // 获取支付参数
+      const payParams = await this.getPayParams(order_number)
 
     //   wepy.navigateTo({
     //       url:''
@@ -113,7 +104,7 @@ export default class extends wepy.mixin {
       this.wxloginQuery = wxloginQuery
 
       // 获取token
-      const tokenRes = await wepy.post('users/wxlogin', wxloginQuery)
+      const tokenRes = await wepy.post('users/wxlogin', wxloginQuery).catch(err => err)
       // 校验token是否成功
       if (tokenRes.errMsg !== 'request:ok') {
         return wepy.baseToast('token获取失败')
@@ -124,5 +115,38 @@ export default class extends wepy.mixin {
       this.$parent.setToken(token)
       this.$apply()
     }
+  }
+
+    // 创建订单
+  async newOrder() {
+    const res = await wepy.post('my/orders/create', {
+      order_price: this.goodsTotal,
+      consignee_addr: this.addressStr,
+      goods: this.goods
+    }).catch(err => err)
+
+          // 对订单响应处理判断
+    if (res.errMsg !== 'request:ok') {
+      return wepy.baseToast('创建订单失败')
+    }
+
+          // 获取订单编号
+    const order_number = res.data.message || 'test123456'
+          // 订单添加到全局订单数组
+    this.$parent.addOrder(res.data)
+
+    return order_number
+  }
+
+  // 获取支付参数
+  async getPayParams(order_number) {
+    //   请求获取支付参数
+    const payParams = await wepy.post('my/orders/req_unifiedorder', {order_number}).catch(err => err)
+
+    // 校验支付参数是否获取成功
+    if (payParams.errMsg !== 'request:ok') {
+      return wepy.baseToast('支付参数获取失败')
+    }
+    return payParams
   }
 }

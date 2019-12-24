@@ -46,6 +46,9 @@
 import wepy from 'wepy'
 import mixin from '@/mixins/order_list/index.js'
 export default class extends wepy.page {
+  config = {
+    navigationBarTitleText: '确认订单'
+  }
   mixins = [mixin]
 }
 </script>

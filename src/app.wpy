@@ -103,7 +103,9 @@ export default class extends wepy.app {
     // 搜索历史记录
     history: [],
     // token
-    token: null
+    token: null,
+    // 订单数组
+    orders: []
   }
 
   // 设置收获地址
@@ -175,6 +177,13 @@ export default class extends wepy.app {
   // 设置Token
   setToken(token) {
     this.globalData.token = token
+
+    this.setStorage()
+  }
+
+  // 添加订单
+  addOrder(order) {
+    this.globalData.orders.push(order)
 
     this.setStorage()
   }
