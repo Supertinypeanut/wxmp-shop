@@ -2,13 +2,16 @@
   <view>
       <!-- 收获地址 -->
       <view class="address">
-          <van-cell use-label-slot @tap="onChooseAddress" border="{{false}}">
+          <van-cell wx:if="{{ address }}" use-label-slot @tap="onChooseAddress" border="{{false}}">
               <view class="titel" slot="title">
                   <text>收货人:{{address.userName}}</text> 
                   <view>联系电话:{{address.telNumber}}<van-icon name="arrow" /></view>
               </view>
               <view class="addressStr" slot="label">收获地址:{{addressStr}}</view>
           </van-cell>
+          <view wx:else class="addressButton">
+            <van-button type="default" size="small" @click="onChooseAddress">+请添加收获地址</van-button>
+          </view>
           <image src="/assets/images/cart_border@2x.png"></image>
       </view>
       <!-- 收获地址 -->
@@ -36,5 +39,10 @@ export default class extends wepy.page {
 image{
     width: 100%;
     height: 10rpx;
+}
+.addressButton{
+    display: flex;
+    justify-content:center;
+    margin-top: 20rpx;
 }
 </style>

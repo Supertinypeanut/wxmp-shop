@@ -10,6 +10,9 @@ export default class extends wepy.mixin {
     addressStr() {
         // 接收地址对象
       const address = this.address
+      if (!address) {
+        return ''
+      }
       return address.provinceName + address.cityName + address.countyName + address.detailInfo
     }
   }
@@ -22,5 +25,9 @@ export default class extends wepy.mixin {
       this.$parent.setAddress(address)
       this.$apply()
     }
+  }
+
+  onShow() {
+
   }
 }
