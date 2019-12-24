@@ -5,7 +5,9 @@ export default class extends wepy.mixin {
     // 联想数据
     responseData: [],
     // 定时器器id
-    timer: undefined
+    timer: undefined,
+    // 文本框值
+    value: '6666'
   }
 
   computed = {
@@ -29,6 +31,7 @@ export default class extends wepy.mixin {
       this.timer = setTimeout(async() => {
       // 搜索关键词
         const query = String.prototype.trim.call(e.detail)
+        this.value = query
       // 对搜索词进行非空校验和请求是否完成校验
         if (!query) {
           // 清空联想数组
@@ -89,5 +92,10 @@ export default class extends wepy.mixin {
   onShow () {
       // 设置购物车选中徽标数量
     this.$parent.setTabBarBadge()
+  }
+  onHide() {
+    // 请空输入框
+    this.value = ''
+    this.$apply()
   }
 }
