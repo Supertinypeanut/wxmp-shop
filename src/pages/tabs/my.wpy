@@ -1,16 +1,26 @@
-<style lang="less">
-</style>
 <template>
-  <view>my<view>
+  <view data-id="1111" @tap="onClick">
+    <view data-id="1">1</view>
+    <view>2</view>
+    <view>3</view>
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
 
   export default class extends wepy.page {
+    methods ={
+      onClick(e) {
+        console.log(e)
+      }
+    }
+
     onShow () {
     // 设置购物车选中徽标数量
       this.$parent.setTabBarBadge()
     }
-  }
+}
 </script>
+<style lang="less">
+</style>

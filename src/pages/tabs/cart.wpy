@@ -20,7 +20,7 @@
     <van-submit-bar
       price="{{ total }}"
       button-text="提交订单"
-      bind:submit="onClickButton"
+      @submit="onSubmitOrder"
     >
       <van-checkbox class="allChoose" value="{{ allDone }}" @change="onAllChooseChange" checked-color="#e00">全选</van-checkbox>
     </van-submit-bar>

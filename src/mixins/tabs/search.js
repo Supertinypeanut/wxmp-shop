@@ -7,7 +7,7 @@ export default class extends wepy.mixin {
     // 定时器器id
     timer: undefined,
     // 文本框值
-    value: '6666'
+    value: ''
   }
 
   computed = {

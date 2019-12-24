@@ -17,7 +17,8 @@ export default class extends wepy.app {
       'pages/tabs/cart',
       'pages/tabs/my',
       'pages/goods_detail/index',
-      'pages/goods_list/index'
+      'pages/goods_list/index',
+      'pages/order_list/index'
     ],
     usingComponents: {
       // 按钮

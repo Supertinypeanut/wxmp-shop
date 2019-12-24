@@ -1,0 +1,40 @@
+<template>
+  <view>
+      <!-- 收获地址 -->
+      <view class="address">
+          <van-cell use-label-slot @tap="onChooseAddress" border="{{false}}">
+              <view class="titel" slot="title">
+                  <text>收货人:{{address.userName}}</text> 
+                  <view>联系电话:{{address.telNumber}}<van-icon name="arrow" /></view>
+              </view>
+              <view class="addressStr" slot="label">收获地址:{{addressStr}}</view>
+          </van-cell>
+          <image src="/assets/images/cart_border@2x.png"></image>
+      </view>
+      <!-- 收获地址 -->
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import mixin from '@/mixins/order_list/index.js'
+export default class extends wepy.page {
+  mixins = [mixin]
+}
+</script>
+
+<style lang="less">
+// 地址样式
+.titel{
+    display: flex;
+    justify-content: space-between;
+}
+.addressStr{
+    color: #000;
+    font-size: 26rpx;
+}
+image{
+    width: 100%;
+    height: 10rpx;
+}
+</style>

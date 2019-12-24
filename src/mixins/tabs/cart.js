@@ -35,6 +35,13 @@ export default class extends wepy.mixin {
       wepy.navigateTo({
         url: `/pages/goods_detail/index?goods_id=${id}`
       })
+    },
+
+    // 提交订单
+    onSubmitOrder(e) {
+      wepy.navigateTo({
+        url: '/pages/order_list/index'
+      })
     }
   }
 
