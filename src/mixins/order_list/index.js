@@ -20,6 +20,13 @@ export default class extends wepy.mixin {
     // 勾选商品列表
     chooseGoods() {
       return this.$parent.globalData.carts.filter(item => item.isChoose)
+    },
+
+    // 商品总价
+    goodsTotal() {
+      let total = 0
+      this.chooseGoods.forEach(item => { total += item.num * item.price })
+      return total * 100
     }
   }
 
