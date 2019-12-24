@@ -19,6 +19,10 @@ export default class extends wepy.mixin {
           params.countyName +
           params.detailInfo
         : '请选择收货地址'
+    },
+
+    total() {
+      return this.$parent.globalData.total
     }
   }
 
