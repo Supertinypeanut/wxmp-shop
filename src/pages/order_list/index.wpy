@@ -1,6 +1,16 @@
 <template>
   <view >
-      orderList
+    <van-tabs active="{{ active }}" @change="onChange" swipeable>
+      <van-tab title="全部">
+        
+      </van-tab>
+      <van-tab title="待付款">
+        
+      </van-tab>
+      <van-tab title="待发货">
+        
+      </van-tab>
+    </van-tabs>
   </view>
 </template>
 
@@ -9,6 +19,9 @@ import wepy from 'wepy'
 import mixin from '@/mixins/order_list/index.js'
 
 export default class extends wepy.page {
+  config = {
+    navigationBarTitleText: '订单列表'
+  }
   mixins = [mixin]
 }
 </script>
