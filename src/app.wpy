@@ -239,6 +239,11 @@ export default class extends wepy.app {
         wepy.showLoading({
           title: '数据加载中...'
         })
+        console.log(this)
+        // 根据请求路径判断请求是否需要携带token
+        if (/\/my\/orders\//.test(p.url)) {
+          p.header['Authorization'] = this.globalData.token
+        }
         // 必须返回OBJECT参数对象，否则无法发送请求到服务端
         return p
       },
@@ -258,6 +263,12 @@ export default class extends wepy.app {
       // 请求成功
       complete (p) {
         wepy.hideLoading()
+        // 在这里清除 storage 中无效的 token
+        if (p.data.meta.msg === '无效token' && p.data.meta.status === 401) {
+          // 如果同时满足这两个条件，证明 storage 中的 token 已经过期了
+          this.globalData.token = null
+          this.saveToStorage()
+        }
         // 必须返回响应数据对象，否则后续无法对响应数据进行处理
         return p
       }
